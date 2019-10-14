@@ -1,0 +1,86 @@
+{
+    "name": "komorebi",
+    "displayName": "komorebi",
+    "description": "komorebi",
+    "publisher": "komorebi",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.39.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.komorebi",
+                "title": "komorebi"
+            },
+            {
+                "command": "extension.selection",
+                "title": "komorebi.selection"
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "komorebi-word-collection",
+                    "title": "WordCollection",
+                    "icon": "./src/assert/word-cloud.svg"
+                }
+            ]
+        },
+        "views": {
+            "komorebi-word-collection": [
+                {
+                    "id": "wordCollection-item",
+                    "name": "单词本"
+                }
+            ]
+        },
+        "menus": {
+            "editor/context": [
+                {
+                    "title": "word collection",
+                    "command": "extension.selection",
+                    "alt": "extension.selection",
+                    "when": "resourceLangId == typescript",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "command": "extension.selection",
+                "key": "ctrl+shit+.",
+                "mac": "cmd+shift+."
+            }
+        ]
+    },
+    "activationEvents": [
+        "onCommand:extension.komorebi",
+        "onView:wordCollection-item",
+        "onCommand:itemClick",
+        "onLanguage:typescript",
+        "onCommand:extension.selection"
+    ],
+    "scripts": {
+        "vscode:prepublish": "yarn run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "yarn run compile",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.1.1",
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^10.12.21",
+        "@types/vscode": "^1.39.0",
+        "glob": "^7.1.4",
+        "mocha": "^6.1.4",
+        "typescript": "^3.3.1",
+        "tslint": "^5.12.1",
+        "vscode-test": "^1.2.0"
+    }
+}
